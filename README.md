@@ -14,7 +14,7 @@ PressPost is a web application that allows users to create their own blog platfo
 
 ## How to Self-Host
 
-1. Clone the repository using `git clone https://github.com/MilesHilliard/presspost.git`
+1. Clone the repository using `git clone https://github.com/syntaxerror019/presspost.git`
 2. Install the required packages using `pip install -r requirements.txt`
 3. Run the application using `python index.py`
 4. Open a web browser and navigate to `http://localhost:5000`
