@@ -4,6 +4,7 @@ import os
 import hashlib
 import base64
 import json
+import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,16 +22,17 @@ def home():
 
 @app.route('/signup')
 def signup():
-    name = request.args.get('name')
+    name = request.args.get('name').replace(" ", "_")
     password = request.args.get('password', None)
     if name and password:
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         r.hset(f"user:{name}", mapping={"password": hashed_password})
         return redirect(url_for('blog', name=name))
-    return render_template('signup.html', name=name)
+    return render_template('signup.html', name=name.replace("_", " "))
 
 @app.route('/blog/<name>', methods=['GET', 'POST'])
 def blog(name):
+    name = name.replace(" ", "_")
     raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
     
     if not r.exists(f"user:{name}"):
@@ -41,23 +43,24 @@ def blog(name):
         post_data = json.loads(post)
         posts.append(post_data)
     
-    return render_template('blog.html', name=name, posts=posts)
+    return render_template('blog.html', name=name.replace("_", " "), posts=posts)
 
 @app.route('/blog/<name>/new', methods=['POST', 'GET'])
 def new_post(name):
+    name = name.replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
-        return render_template('auth.html', name=name), 200
+        return render_template('auth.html', name=name.replace("_", " ")), 200
 
     stored_password = r.hget(f"user:{name}", "password")
     if stored_password != hashlib.sha256(auth.encode()).hexdigest():
-        return render_template('auth.html', name=name, error="Wrong Password"), 401
+        return render_template('auth.html', name=name.replace("_", " "), error="Wrong Password"), 401
 
     title = request.form.get('title', None)
     content = request.form.get('content', None)
     
     if not title or not content:
-        return render_template('new_post.html', name=name, pw=auth)
+        return render_template('new_post.html', name=name.replace("_", " "), pw=auth)
 
     # Handle multiple images
     images_base64 = []
@@ -69,15 +72,17 @@ def new_post(name):
     post_data = {
         "title": title,
         "content": content,
-        "images": images_base64  # list of Base64 images
+        "images": images_base64,
+        "date": datetime.datetime.now(tz=datetime.timezone.utc).isoformat(),
     }
 
-    r.rpush(f"posts:{name}", json.dumps(post_data))
+    r.lpush(f"posts:{name}", json.dumps(post_data))
 
     return redirect(f"/blog/{name}")
 
 @app.route('/blog/<name>/post/<int:post_id>', methods=['GET'])
 def post(name, post_id):
+    name = name.replace(" ", "_")
     raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
     
     if not raw_posts or post_id < 0 or post_id >= len(raw_posts):
@@ -85,19 +90,20 @@ def post(name, post_id):
     
     post_data = json.loads(raw_posts[post_id])
     
-    return render_template('post.html', name=name, post=post_data, post_id=post_id)
+    return render_template('post.html', name=name.replace("_", " "), post=post_data, post_id=post_id)
 
 @app.route('/blog/<name>/post/<int:post_id>/delete', methods=['GET', 'POST'])
 def delete_post(name, post_id):
+    name = name.replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
-        return render_template('auth.html', name=name), 200
+        return render_template('auth.html', name=name.replace("_", " ")), 200
 
     stored_password = r.hget(f"user:{name}", "password")
     if stored_password != hashlib.sha256(auth.encode()).hexdigest():
-        return render_template('auth.html', name=name, error="Wrong Password"), 401
+        return render_template('auth.html', name=name.replace("_", " "), error="Wrong Password"), 401
 
-    raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
+    raw_posts = r.lrange(f"posts:{name}", 0, -1)
     
     if not raw_posts or post_id < 0 or post_id >= len(raw_posts):
         return "Post not found", 404
@@ -109,15 +115,16 @@ def delete_post(name, post_id):
 
 @app.route('/blog/<name>/post/<int:post_id>/edit', methods=['GET', 'POST'])
 def edit_post(name, post_id):
+    name = name.replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
-        return render_template('auth.html', name=name), 200
+        return render_template('auth.html', name=name.replace("_", " ")), 200
 
     stored_password = r.hget(f"user:{name}", "password")
     if stored_password != hashlib.sha256(auth.encode()).hexdigest():
-        return render_template('auth.html', name=name, error="Wrong Password"), 401
+        return render_template('auth.html', name=name.replace("_", " "), error="Wrong Password"), 401
 
-    raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
+    raw_posts = r.lrange(f"posts:{name}", 0, -1)
     
     if not raw_posts or post_id < 0 or post_id >= len(raw_posts):
         return "Post not found", 404
@@ -127,7 +134,7 @@ def edit_post(name, post_id):
         content = request.form.get('content', None)
         
         if not title or not content:
-            return render_template('edit_post.html', name=name, post=json.loads(raw_posts[post_id]), pw=auth)
+            return render_template('edit_post.html', name=name.replace("_", " "), post=json.loads(raw_posts[post_id]), pw=auth)
 
         # Handle multiple images
         images_base64 = json.loads(raw_posts[post_id]).get('images', [])
@@ -139,7 +146,8 @@ def edit_post(name, post_id):
         post_data = {
             "title": title,
             "content": content,
-            "images": images_base64  # list of Base64 images
+            "images": images_base64,  # list of Base64 images
+            "date": datetime.datetime.now(tz=datetime.timezone.utc).isoformat(),
         }
 
         r.lset(f"posts:{name}", post_id, json.dumps(post_data))
@@ -147,7 +155,15 @@ def edit_post(name, post_id):
         return redirect(f"/blog/{name}/post/{post_id}")
 
     post_data = json.loads(raw_posts[post_id])
-    return render_template('edit_post.html', name=name, post=post_data)
+    return render_template('edit_post.html', name=name.replace("_", " "), post=post_data)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', error=e), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html', error=e), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

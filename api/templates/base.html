@@ -20,10 +20,36 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <title>{% block title %}PressPost - The World's Simplest Blog Platform{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
 </head>
 <body>
+    <div id="loading-overlay" 
+        style="
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        ">
+        Loading...
+    </div>
+
     <header>
-        <a href="/"><h1>{% block header %}PressPost{% endblock %}</h1></a>
+        {% if self.header is not defined %}
+        <a href="/"><h1>PressPost</h1></a>
+        {% else %}
+        {% set header_content = self.header() %}
+        {% if header_content == 'PressPost' %}
+            <a href="/"><h1>{{ header_content }}</h1></a>
+        {% else %}
+           <a href="/blog/{{ header_content}}"><h1>{{ header_content }}</h1></a>
+        {% endif %}
+        {% endif %}
     </header>
 
     <main>

@@ -11,8 +11,8 @@
 </div>
 
 <div class="post-content">
-    <h1>{{ post.title }}</h1>
-
+    <h1 style="margin-bottom: 0.0rem;">{{ post.title }}</h1>
+    <sub style="margin-top: 0.0rem;">{{ post.date.split('T')[0] }}</sub>
     <div class="line"></div>
 
     <p class="content">{{ post.content | safe }}</p>

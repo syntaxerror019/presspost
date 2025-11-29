@@ -24,7 +24,6 @@ ul {
 
 .posts {
     max-width: 800px;
-    margin: 0 auto;
     padding: 20px;
     font-family: Arial, sans-serif;
 }
@@ -38,7 +37,6 @@ ul {
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: box-shadow 0.3s ease-in-out;
-    align-items: flex-start;
 }
 
 .post:hover {
@@ -84,9 +82,16 @@ ul {
 }
 
 .post h2 {
-    margin: 0 0 10px;
+    margin: 0;
     color: #333;
     font-size: 1.2em;
+}
+
+.post sub {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    display: block;
 }
 
 .post p {
@@ -101,10 +106,24 @@ ul {
     -webkit-box-orient: vertical;
 }
 
+.post button {
+    margin-top: 15px;
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+.post button:hover {
+    background-color: #555;
+}
+
 .post-image {
     margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .post-form {
@@ -156,6 +175,15 @@ header a {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.post-content h1 {
+  margin-top: 0;
+}
+
+.post-content sub {
+  color: #888;
+  font-size: 0.9em;
 }
 
 main {

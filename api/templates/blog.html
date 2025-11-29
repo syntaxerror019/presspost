@@ -19,7 +19,9 @@
         {% endif %}
         <div class="post-info">
             <h2>{{ post.title }}</h2>
+            <sub>{{ post.date.split('T')[0] }}</sub>
             <p>{{ post.content }}</p>
+            <button id="ignore-overlay" class="read-more" onclick="location.href='{{ url_for('post', name=name, post_id=loop.index0) }}'">Read More &rarr;</button>
         </div>
     </a>
 </div>
