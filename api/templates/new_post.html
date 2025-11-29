@@ -1,0 +1,20 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}New Post - PressPost{% endblock %}
+
+{% block content %}
+
+<h1>New Post for {{ name }}</h1>
+<form method="post" class="post-form" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required><br>
+    <textarea name="content" placeholder="What do you want to write about?" required></textarea><br>
+    <label for="images">Upload Images (optional):</label>
+    <input type="file" name="images" multiple><br>
+    <input type="hidden" name="auth" value="{{ pw }}">
+    <button type="submit">Post</button>
+</form>
+<sub>HTML is supported in the content.</sub>
+
+{% endblock %}

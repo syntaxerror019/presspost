@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ name }} - PressPost{% endblock %}
+
+{% block header %}{{ name }}{% endblock %}
+
+{% block content %}
+<div class="posts">
+{% if posts|length == 0 %}
+    <p>No posts yet. Go on and <a href="{{ url_for('new_post', name=name) }}">write one</a>!</p>
+{% endif %}
+{% for post in posts %}
+<div class="post">
+    <a href="{{ url_for('post', name=name, post_id=loop.index0) }}", class="post-link">
+        {% if post.images %}
+            {% for img in post.images[:1] %}
+                <img src="data:image/png;base64,{{ img }}">
+            {% endfor %}
+        {% endif %}
+        <div class="post-info">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+        </div>
+    </a>
+</div>
+{% endfor %}
+</div>
+
+<a href="{{ url_for('new_post', name=name) }}">Create New Post</a>
+
+
+{% endblock %}

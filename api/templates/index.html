@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align:center; margin-top:2rem;">
+    <h1>World's Simplest Blog</h1>
+    <p>Share your thoughts, journals, or even your random midnight epiphanies.</p>
+    <p>No email, no signup headaches. Just write and <strong>PressPost</strong>!</p>
+
+    <form action="/signup" method="get" style="margin-top:1rem;">
+        <input type="text" name="name" placeholder="Your Blog's Name" required style="padding:0.5rem; font-size:1rem;">
+        <button type="submit" style="padding:0.5rem 1rem; font-size:1rem; cursor:pointer;">Get Started</button>
+    </form>
+</div>
+
+<hr style="margin:3rem 0;">
+
+<div>
+    <h2>Recently Created Blogs</h2>
+    {% if all_blogs %}
+        <ul>
+        {% for blog in all_blogs %}
+            <li><a href="{{ url_for('blog', name=blog) }}" style="text-decoration:none; color:#2c3e50;">{{ blog }}</a></li>
+        {% endfor %}
+        <li>...</li>
+        </ul>
+    {% else %}
+        <p>No blogs yet. Be the first to <strong>PressPost</strong>!</p>
+    {% endif %}
+</div>
+
+{% endblock %}

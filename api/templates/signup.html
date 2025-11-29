@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>You're Nearly There</h1>
+<p>Your new blog, <b>{{ name }}</b>, is nearly ready to go live.</p>
+<p>We just need you to enter a memorable password to secure your blog. (So that random people can't write on your blog!)</p>
+
+<form action="/signup" method="get">
+    <input type="password" name="password" placeholder="Enter a Password" required>
+    <input type="hidden" name="name" value="{{ name }}">
+    <button type="submit">Finish</button>
+</form>
+
+{% endblock %}
