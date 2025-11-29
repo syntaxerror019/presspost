@@ -1,4 +1,4 @@
-# PressPost
+# PressPost - World's Simplest Blog
 
 PressPost is a web application that allows users to create their own blog platform. It is a simple and easy-to-use platform that allows users to create their own blog and share their thoughts, journals, and even their random midnight epiphanies.
 
@@ -10,7 +10,7 @@ PressPost is a web application that allows users to create their own blog platfo
 * Ability to create a password to secure your blog
 * Ability to edit and delete posts
 
-# Give it a shot at [presspost.sntx.dev](https://presspost.sntx.dev)
+## Give it a shot at [presspost.sntx.dev](https://presspost.sntx.dev)
 
 ## How to Self-Host
 
@@ -28,13 +28,13 @@ PressPost is a web application that allows users to create their own blog platfo
 
 ## Screenshots
 
-![Screenshot of the login page](screenshots/login.png)
+![Screenshot of the login page](screenshots/image.png)
 
 ![Screenshot of the blog page](screenshots/blog.png)
 
-![Screenshot of the create post page](screenshots/create_post.png)
+![Screenshot of the create post page](screenshots/login.png)
 
-![Screenshot of the edit post page](screenshots/edit_post.png)
+![Screenshot of the edit post page](screenshots/edit.png)
 
 ## License
 
