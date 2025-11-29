@@ -1,5 +1,7 @@
 # PressPost - World's Simplest Blog
 
+![Screenshot of the blog page](screenshots/blog.png)
+
 PressPost is a web application that allows users to create their own blog platform. It is a simple and easy-to-use platform that allows users to create their own blog and share their thoughts, journals, and even their random midnight epiphanies.
 
 ## Features
@@ -28,14 +30,15 @@ PressPost is a web application that allows users to create their own blog platfo
 
 ## Screenshots
 
-![Screenshot of the login page](screenshots/image.png)
-
-![Screenshot of the blog page](screenshots/blog.png)
-
 ![Screenshot of the create post page](screenshots/login.png)
 
 ![Screenshot of the edit post page](screenshots/edit.png)
 
+![Screenshot of the blog page](screenshots/blog.png)
+
+![Screenshot of the login page](screenshots/image.png)
+
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed - see the [LICENSE](LICENSE) file for details.
