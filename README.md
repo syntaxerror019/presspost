@@ -2,7 +2,7 @@
 
 ![Screenshot of the blog page](screenshots/blog.png)
 
-PressPost is a web application that allows users to create their own blog platform. It is a simple and easy-to-use platform that allows users to create their own blog and share their thoughts, journals, and even their random midnight epiphanies.
+PressPost is a web application that allows users to create their own blog platform. It is a simple and easy-to-use platform that allows users to create their own blog and share their thoughts, journals, and even their random midnight realization.
 
 ## Features
 
