@@ -5,6 +5,7 @@ import hashlib
 import base64
 import json
 import datetime
+from urllib.parse import unquote
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,7 +33,7 @@ def signup():
 
 @app.route('/blog/<name>', methods=['GET', 'POST'])
 def blog(name):
-    name = name.replace(" ", "_")
+    name = unquote(name).replace(" ", "_")
     raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
     
     if not r.exists(f"user:{name}"):
@@ -47,7 +48,7 @@ def blog(name):
 
 @app.route('/blog/<name>/new', methods=['POST', 'GET'])
 def new_post(name):
-    name = name.replace(" ", "_")
+    name = unquote(name).replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
         return render_template('auth.html', name=name.replace("_", " ")), 200
@@ -82,7 +83,7 @@ def new_post(name):
 
 @app.route('/blog/<name>/post/<int:post_id>', methods=['GET'])
 def post(name, post_id):
-    name = name.replace(" ", "_")
+    name = unquote(name).replace(" ", "_")
     raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
     
     if not raw_posts or post_id < 0 or post_id >= len(raw_posts):
@@ -94,7 +95,7 @@ def post(name, post_id):
 
 @app.route('/blog/<name>/post/<int:post_id>/delete', methods=['GET', 'POST'])
 def delete_post(name, post_id):
-    name = name.replace(" ", "_")
+    name = unquote(name).replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
         return render_template('auth.html', name=name.replace("_", " ")), 200
@@ -115,7 +116,7 @@ def delete_post(name, post_id):
 
 @app.route('/blog/<name>/post/<int:post_id>/edit', methods=['GET', 'POST'])
 def edit_post(name, post_id):
-    name = name.replace(" ", "_")
+    name = unquote(name).replace(" ", "_")
     auth = request.form.get('auth', None)
     if auth is None:
         return render_template('auth.html', name=name.replace("_", " ")), 200
