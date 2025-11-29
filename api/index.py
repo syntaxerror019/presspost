@@ -32,7 +32,6 @@ def signup():
 
 @app.route('/blog/<name>', methods=['GET', 'POST'])
 def blog(name):
-    name = name.replace(" ", "_")
     raw_posts = r.lrange(f"posts:{name}", 0, -1)  # all posts
     
     if not r.exists(f"user:{name}"):
