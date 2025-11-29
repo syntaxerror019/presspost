@@ -1,28 +1,41 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+# PressPost
 
-# Flask + Vercel
+PressPost is a web application that allows users to create their own blog platform. It is a simple and easy-to-use platform that allows users to create their own blog and share their thoughts, journals, and even their random midnight epiphanies.
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+## Features
 
-## Demo
+* Simple and easy-to-use interface
+* Ability to create multiple posts
+* Ability to upload images to posts
+* Ability to create a password to secure your blog
+* Ability to edit and delete posts
 
-https://flask-python-template.vercel.app/
+# Give it a shot at [presspost.sntx.dev](https://presspost.sntx.dev)
 
-## How it Works
+## How to Self-Host
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+1. Clone the repository using `git clone https://github.com/MilesHilliard/presspost.git`
+2. Install the required packages using `pip install -r requirements.txt`
+3. Run the application using `python index.py`
+4. Open a web browser and navigate to `http://localhost:5000`
+5. Create a new blog by clicking on the "Create a Blog" button
+6. Enter the name of your blog and click on the "Create Blog" button
+7. Enter a password to secure your blog and click on the "Create Blog" button
+8. Click on the "Create a Post" button to create a new post
+9. Enter the title and content of your post and click on the "Post" button
+10. Click on the "Edit Post" button to edit a post
+11. Click on the "Delete Post" button to delete a post
 
-## Running Locally
+## Screenshots
 
-```bash
-npm i -g vercel
-vercel dev
-```
+![Screenshot of the login page](screenshots/login.png)
 
-Your Flask application is now available at `http://localhost:3000`.
+![Screenshot of the blog page](screenshots/blog.png)
 
-## One-Click Deploy
+![Screenshot of the create post page](screenshots/create_post.png)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+![Screenshot of the edit post page](screenshots/edit_post.png)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
